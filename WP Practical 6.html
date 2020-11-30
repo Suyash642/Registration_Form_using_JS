@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> JS Sample Form </title>    
+<style>
+input[type=text], select {
+  width: 100%;
+  padding: 12px 20px;
+  font-size:15px;
+  font-style:cambria;
+  margin: 15px 0px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  width: 25%;
+  background-color: #4CAF50;
+  font-size: 16px;
+  font-style:cambria;
+  color: white;
+  padding: 14px 20px;
+  margin: 14px 0;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+div {
+  border-radius: 10px;
+  background-color: #f2f2f2;
+  padding: 20px;
+  margin: 50px 300px 50px;
+}
+
+label {
+  font-size:18px;
+}
+
+body {
+background: linear-gradient(slateblue, #ff9968, #ff5e63) no-repeat;
+}
+
+</style>
+
+<script>
+function displayresult(uname,uadd,gender,country,zip,email,mob,color)
+{
+    document.write("<h1>Thanks for Your Response :)</h1>"+
+    "<h2>Your details :-</h2>"+
+    "<h3> <b> Name : </b>"+ uname.value+"<br><br>"+
+    "<b> Address : </b>"+ uadd.value+" - "+ zip.value+"<br><br>"+
+    "<b> Gender : </b>"+ gender.value+"<br><br>"+
+    "<b> Country : </b>"+ country.value+"<br><br>"+
+    "<b> Mobile No. : </b>"+ mob.value+"<br><br>"+
+    "<b> Email : </b>"+ email.value+"<br><br>"+
+    "<b> Fav. Color : </b>"+color.value+"<br><br></h3>");
+    
+}
+
+function validateform()
+{
+    var uname = document.myform.username;
+    var uadd = document.myform.address;
+    var gender = document.myform.genders;
+    var country = document.myform.countries;
+    var zip = document.myform.zipcode;
+    var email = document.myform.email;
+    var mob = document.myform.mobno;
+    var color = document.myform.favcolor;
+    
+    var mailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    
+	var letters = /^[A-Za-z\s]+$/;
+    
+    if(uname.value.match(letters) == null)
+    {
+    	alert("Username must have alphabet characters only!!");
+        uname.focus();
+        return false;
+    }
+    
+    if(uname.value.length > 30)
+    {
+    	alert("Username is too long!!");
+        uname.focus();
+        return false;
+    }
+    
+    if(uadd.value.match(/^[0-9a-zA-Z,.'\s]+$/)== null)
+    {
+    	alert('User address must have alphanumeric characters only');
+        uadd.focus();
+        return false;
+    }
+    
+    if(gender.value == "Default")
+    {
+    	alert("Unappropriate Gender Selection!!");
+        gender.focus();
+        return false;
+    }
+    
+    if(country.value == "Default")
+    {
+    	alert("Unappropriate Country Selection!!");
+        country.focus();
+        return false;
+    }
+    
+    if(zip.value.length != 6 || zip.value.match(/^[0-9]+$/)== null)
+    {
+    	alert("Unvalid Zipcode!!");
+        zip.focus();
+        return false;
+    }
+    
+    
+    if(email.value.match(mailformat)== null)
+    {
+    	alert("Unvalid email ID!!");
+        email.focus();
+        return false;
+    }
+    
+    if(mob.value.length != 10 || mob.value.match(/^[0-9]+$/)== null)
+    {
+    	alert("Unvalid Mobile No. !!");
+        mob.focus();
+        return false;
+    }
+    
+    if(color.value == "" || color.value.match(/^[A-Za-z]+$/)== null)
+    {
+    	alert("Please Provide Appropriate Favcolor!!");
+        color.focus();
+        return false;
+    }
+    
+    displayresult(uname,uadd,gender,country,zip,email,mob,color);
+}
+</script>
+</head>
+
+
+<body>
+<div>
+  <form name="myform"  onsubmit="return validateform()">
+    <label for="fname"><b> Name</b></label>
+    <input type="text" id="fname" name="username" placeholder="Your name.."required >
+
+    <label for="add"><b>Address</b></label>
+    <input type="text" id="add" name="address" placeholder="Your address.."required >
+    
+    <label for="gender"><b>Gender</b></label>
+    <select id="gender" name="genders">
+    <option selected="" value="Default">Select Gender</option>
+      <option value="Male">Male</option>
+      <option value="Female">Female</option>
+      <option value="Others">Others</option>
+    </select>
+
+    <label for="country"><b>Country</b></label>
+    <select id="country" name="countries">
+      <option selected="" value="Default">Select your country..</option>
+      <option value="Australia">Australia</option>
+      <option value="Canada">Canada</option>
+      <option value="USA">USA</option>
+      <option value="India">India</option>
+      <option value="Japan">Japan</option>
+      <option value="Sydney">Sydney</option>
+      <option value="Africa">Africa</option>
+    </select>
+    
+    <label for="zip"><b>Zip Code </b></label>
+    <input type="text" id="zip" name="zipcode" placeholder="Your Zipcode..">
+    
+    <label for="email"><b>Email </b></label>
+    <input type="text" id="email" name="email" placeholder="Your email ID.."required >
+    
+    <label for="mob"><b>Mobile No.</b></label>
+    <input type="text" id="mob" name="mobno" placeholder="Your mobile number .."required >
+    
+    <label for="color"><b>Fav. Color</b></label>
+    <input type="text" id="color" name="favcolor" placeholder="Your favourite color..">
+    
+    <input type="submit" value="Submit">
+  </form>
+</div>
+
+</body>
+</html>
